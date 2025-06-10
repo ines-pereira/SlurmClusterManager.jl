@@ -122,7 +122,7 @@ function _new_environment_additions(params_env::Dict{String, String})
 end
 
 function warn_if_unexpected_params(params::Dict)
-    params_that_we_support = [:dir, :exename, :exeflags]
+    params_that_we_support = [:dir, :exename, :exeflags, :topology, :lazy]
     upstreams_defaults = Distributed.default_addprocs_params()
     for (k, v) in pairs(params)
         if k == :env
