@@ -60,9 +60,12 @@ elseif v"1.6.0" <= Base.VERSION < v"1.9.0"
   function Distributed.default_addprocs_params(::SlurmManager)
     our_stuff = Dict{Symbol,Any}(
       :env => [],
+      :topology => :master_worker,
+      :lazy => false,
     )
     upstreams_stuff = Distributed.default_addprocs_params()
-    total_stuff = merge(our_stuff, upstreams_stuff)
+    total_stuff = merge(upstreams_stuff, our_stuff)
+    #total_stuff = merge(our_stuff, upstreams_stuff)
     return total_stuff
   end
 elseif Base.VERSION < v"1.6.0"
